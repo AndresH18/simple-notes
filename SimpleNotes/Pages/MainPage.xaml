@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:pageModel="clr-namespace:SimpleNotes.PageModel"
+             xmlns:controls="clr-namespace:SimpleNotes.Pages.Controls"
+             xmlns:simpleNotes="clr-namespace:SimpleNotes"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             x:Class="SimpleNotes.Pages.MainPage"
+             x:DataType="pageModel:MainPageModel">
+
+    <Grid>
+        <ListView ItemsSource="{Binding Notes}" ItemSelected="ListView_OnItemSelected">
+            <!-- <ListView.Behaviors> -->
+            <!--     <toolkit:EventToCommandBehavior EventName="ItemSelected" -->
+            <!--                                     x:TypeArguments="SelectedItemChangedEventArgs" -->
+            <!--                                     Command="{Binding ViewNoteCommand}" /> -->
+            <!-- </ListView.Behaviors> -->
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="simpleNotes:Note">
+                    <!-- <Border Margin="10"> -->
+                    <!--     <Label TextType="Text" FontAttributes="Bold" Text="{Binding Content}" /> -->
+                    <!-- </Border> -->
+                    <TextCell Text="{Binding Title}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <controls:AddButton Command="{Binding AddNoteCommand}" />
+    </Grid>
+</ContentPage>

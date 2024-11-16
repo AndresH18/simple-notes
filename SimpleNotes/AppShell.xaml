@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Shell
+    x:Class="SimpleNotes.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:SimpleNotes"
+    xmlns:pages="clr-namespace:SimpleNotes.Pages"
+    Shell.FlyoutBehavior="Disabled"
+    Title="Simple Notes">
+
+    <ShellContent
+        ContentTemplate="{DataTemplate pages:MainPage}"
+        Route="MainPage" />
+
+</Shell>
