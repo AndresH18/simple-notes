@@ -28,7 +28,7 @@
 		<ApplicationTitle>SimpleNotes</ApplicationTitle>
 
 		<!-- App Identifier -->
-		<ApplicationId>com.companyname.simplenotes</ApplicationId>
+		<ApplicationId>com.andresh18.simplenotes</ApplicationId>
 
 		<!-- Versions -->
 		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
