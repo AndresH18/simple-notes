@@ -9,6 +9,9 @@
              x:Class="SimpleNotes.Pages.MainPage"
              x:DataType="pageModel:MainPageModel">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Create" Command="CreateNoteCommand" />
+    </ContentPage.ToolbarItems>
     <Grid>
         <ListView ItemsSource="{Binding Notes}" ItemSelected="ListView_OnItemSelected">
             <!-- <ListView.Behaviors> -->
@@ -25,7 +28,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
-        <controls:AddButton Command="{Binding AddNoteCommand}" />
     </Grid>
 </ContentPage>

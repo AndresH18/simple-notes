@@ -4,16 +4,32 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pageModel="clr-namespace:SimpleNotes.PageModel"
              xmlns:controls="clr-namespace:SimpleNotes.Pages.Controls"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:simpleNotes="using:SimpleNotes"
              x:Class="SimpleNotes.Pages.EditNotePage"
              x:DataType="pageModel:EditNotePageModel">
+    <ContentPage.Resources>
+        <toolkit:EventToCommandBehavior x:Key="NavigateFromBehaviour" EventName="NavigatingFrom"
+                                        Command="{Binding SaveNoteCommand}" />
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Delete"
+                     Command="{Binding DeleteNoteCommand}"/>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Behaviors>
+        <x:StaticResource Key="NavigateFromBehaviour" />
+    </ContentPage.Behaviors>
     <ContentPage.Content>
         <Grid>
-            <VerticalStackLayout>
-                <Entry Text="{Binding Note.Title}" FontSize="24" Placeholder="Add your note title" />
-                <Editor Text="{Binding Note.Content}" Placeholder="Add your note here" />
-            </VerticalStackLayout>
-            <controls:AddButton Command="{Binding SaveNoteCommand}"
-                                CommandParameter="{Binding Note}" />
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Entry Text="{Binding Note.Title}" FontSize="24" Placeholder="Add your note title"
+                   MaxLength="{x:Static simpleNotes:Note.MaxTitleLength}" Grid.Row="0" />
+
+            <Editor Text="{Binding Note.Content}" Placeholder="Add your note here"
+                    MaxLength="{x:Static simpleNotes:Note.MaxContentLength}" Grid.Row="1" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

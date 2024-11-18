@@ -1,30 +1,38 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
+﻿using CommunityToolkit.Mvvm.Input;
 
 namespace SimpleNotes.PageModel;
 
 public partial class EditNotePageModel(Repository repository) : BasePageModel, IQueryAttributable
 {
+    private bool _isNewNote = true;
     public Note Note { get; private set; } = new();
 
     [RelayCommand]
-    private async Task SaveNote(Note note)
+    private void SaveNote()
     {
-        if (repository.CreateOrReplace(note))
-        {
-            await Shell.Current.GoToAsync("..");
-        }
+        if (_isNewNote)
+            repository.Create(Note);
         else
+            repository.Update(Note);
+    }
+
+    [RelayCommand]
+    private async Task DeleteNote()
+    {
+        if (!_isNewNote)
         {
-            await Application.Current.MainPage.DisplayAlert("Error", "There was an error saving the note", "OK");
+            repository.Delete(Note.Id);
         }
+
+        await Shell.Current.GoToAsync("..");
     }
 
     public void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        if (query.TryGetValue(nameof(Note), out var val) && val is Note note)
+        if (query.TryGetValue("Id", out var value) && value is int id)
         {
-            Note = note;
+            _isNewNote = false;
+            Note = repository.Get(id) ?? new Note();
             OnPropertyChanged(nameof(Note));
         }
     }

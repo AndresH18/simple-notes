@@ -13,7 +13,7 @@ public partial class BasePageModel : ObservableObject
         InitializeAsyncCommand =
             new AsyncRelayCommand(async () =>
             {
-                if (_isInitialized)
+                if (IsInitialized)
                     return;
                 await IsBusyFor(InitializeAsync);
                 IsInitialized = true;
@@ -21,7 +21,7 @@ public partial class BasePageModel : ObservableObject
         RefreshAsyncCommand =
             new AsyncRelayCommand(async () =>
             {
-                if (_isInitialized)
+                if (IsInitialized)
                 {
                     await IsBusyFor(RefreshAsync);
                 }
@@ -35,9 +35,7 @@ public partial class BasePageModel : ObservableObject
 
     public IAsyncRelayCommand InitializeAsyncCommand { get; }
     public IAsyncRelayCommand RefreshAsyncCommand { get; }
-
     public bool IsBusy => Interlocked.Read(ref _isBusy) > 0;
-
 
     public bool IsInitialized
     {
@@ -54,7 +52,6 @@ public partial class BasePageModel : ObservableObject
     {
         return Task.CompletedTask;
     }
-
 
     protected async Task IsBusyFor(Func<Task> unitOfWork)
     {
