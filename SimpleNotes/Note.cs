@@ -9,7 +9,7 @@ public class Note
     public const int MaxContentLength = 1000;
 
     [PrimaryKey, AutoIncrement] public int Id { get; set; }
-    [MaxLength(MaxTitleLength)] public string Title { get; set; } = "New Note";
+    [MaxLength(MaxTitleLength)] public string Title { get; set; } = DateTime.Now.Date.ToShortDateString();
     [MaxLength(MaxContentLength)] public string Content { get; set; } = string.Empty;
 
     protected bool Equals(Note other)

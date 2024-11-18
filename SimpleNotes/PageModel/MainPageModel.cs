@@ -36,14 +36,12 @@ public partial class MainPageModel(Repository repository, ILogger<MainPageModel>
     }
 
     [RelayCommand]
-    private  Task ViewNote(SelectedItemChangedEventArgs args)
+    private async Task ViewNote(SelectionChangedEventArgs args)
     {
         logger.LogInformation("Entered View Note method");
-        if (args.SelectedItem is not Note note)
-            return Task.CompletedTask;
-        return Task.CompletedTask;
-
-        // await Shell.Current.GoToAsync(nameof(EditNotePage),
-        //     new Dictionary<string, object> { [nameof(Note)] = note });
+        if (args.CurrentSelection.Count != 0 && args.CurrentSelection[0] is Note note)
+        {
+            await Shell.Current.GoToAsync($"{nameof(EditNotePage)}?Id={note.Id}");
+        }
     }
 }

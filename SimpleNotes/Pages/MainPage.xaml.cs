@@ -12,13 +12,9 @@ public partial class MainPage : ContentPage
         BindingContext = _model = model;
     }
 
-    protected override async void OnAppearing()
+    protected override void OnAppearing()
     {
-        await _model.RefreshAsyncCommand.ExecuteAsync(null);
-    }
-
-    private async void ListView_OnItemSelected(object? sender, SelectedItemChangedEventArgs e)
-    {
-        await _model.ViewNoteCommand.ExecuteAsync(e);
+        _model.RefreshAsyncCommand.Execute(null);
+        ItemsCollectionView.SelectedItem = null;
     }
 }

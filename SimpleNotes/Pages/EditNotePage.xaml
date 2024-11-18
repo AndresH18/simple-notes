@@ -14,22 +14,29 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Delete"
-                     Command="{Binding DeleteNoteCommand}"/>
+                     Command="{Binding DeleteNoteCommand}" IconImageSource="trash_icon.png" />
     </ContentPage.ToolbarItems>
     <ContentPage.Behaviors>
         <x:StaticResource Key="NavigateFromBehaviour" />
     </ContentPage.Behaviors>
     <ContentPage.Content>
-        <Grid>
+        <Grid RowSpacing="10" Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
-            <Entry Text="{Binding Note.Title}" FontSize="24" Placeholder="Add your note title"
-                   MaxLength="{x:Static simpleNotes:Note.MaxTitleLength}" Grid.Row="0" />
+            <Entry Text="{Binding Note.Title}"
+                   FontSize="24"
+                   Placeholder="Add your note title"
+                   MaxLength="{x:Static simpleNotes:Note.MaxTitleLength}"
+                   Grid.Row="0" />
 
-            <Editor Text="{Binding Note.Content}" Placeholder="Add your note here"
-                    MaxLength="{x:Static simpleNotes:Note.MaxContentLength}" Grid.Row="1" />
+            <Editor Text="{Binding Note.Content}"
+                    TextColor="{DynamicResource PrimaryTextColor}"
+                    Placeholder="Add your note here"
+                    MaxLength="{x:Static simpleNotes:Note.MaxContentLength}"
+                    AutoSize="TextChanges"
+                    Grid.Row="1" />
         </Grid>
     </ContentPage.Content>
 </ContentPage>

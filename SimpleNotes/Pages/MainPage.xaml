@@ -10,23 +10,36 @@
              x:DataType="pageModel:MainPageModel">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Create" Command="CreateNoteCommand" />
+        <ToolbarItem Text="Create" Command="{Binding CreateNoteCommand}" IconImageSource="add_icon.png" />
     </ContentPage.ToolbarItems>
     <Grid>
-        <ListView ItemsSource="{Binding Notes}" ItemSelected="ListView_OnItemSelected">
-            <!-- <ListView.Behaviors> -->
-            <!--     <toolkit:EventToCommandBehavior EventName="ItemSelected" -->
-            <!--                                     x:TypeArguments="SelectedItemChangedEventArgs" -->
-            <!--                                     Command="{Binding ViewNoteCommand}" /> -->
-            <!-- </ListView.Behaviors> -->
-            <ListView.ItemTemplate>
+        <CollectionView x:Name="ItemsCollectionView" ItemsSource="{Binding Notes}" SelectionMode="Single">
+            <CollectionView.Behaviors>
+                <toolkit:EventToCommandBehavior EventName="SelectionChanged"
+                                                x:TypeArguments="SelectionChangedEventArgs"
+                                                Command="{Binding ViewNoteCommand}" />
+            </CollectionView.Behaviors>
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="simpleNotes:Note">
-                    <!-- <Border Margin="10"> -->
-                    <!--     <Label TextType="Text" FontAttributes="Bold" Text="{Binding Content}" /> -->
-                    <!-- </Border> -->
-                    <TextCell Text="{Binding Title}" />
+                    <Border Padding="10" Margin="0, 5" BackgroundColor="{DynamicResource Gray500}">
+                        <VerticalStackLayout>
+                            <Label Text="{Binding Title}"
+                                   FontSize="18"
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource PrimaryTextColor}" />
+
+                            <Label Text="{Binding Content}"
+                                   FontSize="14"
+                                   TextColor="{DynamicResource Gray200}"
+                                   MaxLines="2"
+                                   LineBreakMode="TailTruncation" />
+                        </VerticalStackLayout>
+                    </Border>
                 </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </Grid>
 </ContentPage>
