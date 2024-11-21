@@ -25,7 +25,7 @@
 		<!-- <MauiEnableXamlCBindingWithSourceCompilation>true</MauiEnableXamlCBindingWithSourceCompilation> -->
 
 		<!-- Display name -->
-		<ApplicationTitle>SimpleNotes</ApplicationTitle>
+		<ApplicationTitle>Simple Notes</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.andresh18.simplenotes</ApplicationId>

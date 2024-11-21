@@ -6,7 +6,7 @@ namespace SimpleNotes;
 public class Note
 {
     public const int MaxTitleLength = 50;
-    public const int MaxContentLength = 1000;
+    public const int MaxContentLength = 100_000;
 
     [PrimaryKey, AutoIncrement] public int Id { get; set; }
     [MaxLength(MaxTitleLength)] public string Title { get; set; } = DateTime.Now.Date.ToShortDateString();

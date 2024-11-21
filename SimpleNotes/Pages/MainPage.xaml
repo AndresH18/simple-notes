@@ -20,7 +20,7 @@
                                                 Command="{Binding ViewNoteCommand}" />
             </CollectionView.Behaviors>
             <CollectionView.ItemsLayout>
-                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                <LinearItemsLayout Orientation="Vertical" ItemSpacing="3" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="simpleNotes:Note">
@@ -33,7 +33,7 @@
 
                             <Label Text="{Binding Content}"
                                    FontSize="14"
-                                   TextColor="{DynamicResource Gray200}"
+                                   TextColor="{DynamicResource PrimaryTextColor}"
                                    MaxLines="2"
                                    LineBreakMode="TailTruncation" />
                         </VerticalStackLayout>
